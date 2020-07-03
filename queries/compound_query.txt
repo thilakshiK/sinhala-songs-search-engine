@@ -1,0 +1,17 @@
+curl --location --request GET 'http://localhost:9200/sinhala_songs/_search ' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "lyrics": "අම්මා" } }
+      ],
+
+      "must_not" : {
+        "range" : {
+          "views" : { "lte" : 2000 }
+        }
+      }
+    }
+  }
+}'

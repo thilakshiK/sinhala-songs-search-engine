@@ -1,0 +1,12 @@
+curl --location --request GET 'http://localhost:9200/sinhala_songs/_search ' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "query": {
+        "term": {
+            "artist": {
+                "value": "සුනිල්",
+                "boost": 1.0
+            }
+        }
+    }
+}'

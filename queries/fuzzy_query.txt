@@ -1,0 +1,16 @@
+curl --location --request GET 'http://localhost:9200/sinhala_songs/_search ' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "query": {
+        "fuzzy": {
+            "artist": {
+                "value": "ගුණදා",
+                "fuzziness": "AUTO",
+                 "max_expansions": 50,
+                "prefix_length": 0,
+                "transpositions": true,
+                "rewrite": "constant_score"
+            }
+        }
+    }
+}'

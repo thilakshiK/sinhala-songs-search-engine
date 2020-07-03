@@ -1,0 +1,9 @@
+curl --location --request GET 'http://localhost:9200/sinhala_songs/_search ' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "query": {
+        "match_phrase" : {
+            "lyrics" : "ලහිරු මඬල අම්මා"
+        }
+    }
+}'

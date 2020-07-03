@@ -1,0 +1,23 @@
+curl --location --request GET 'http://localhost:9200/sinhala_songs/_search?size=0' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "aggs": {
+        
+            "aggs": {
+                
+                    "top_hits": {
+                        "sort": [
+                            {
+                                "views": {
+                                    "order": "desc"
+                                }
+                            }
+                        ],
+                        "_source": {
+                            "includes": [ "title","lyrics","views" ]
+                        },
+                        "size" : 10
+                    }
+                }
+            }
+}'

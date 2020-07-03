@@ -1,0 +1,134 @@
+curl --location --request PUT 'http://localhost:9200/sinhala_songs' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "custom_analyzer": {
+          "tokenizer": "whitespace",
+          "filter": [ "custom_stop_words_filter", "custom_synonym"  ]
+        }
+      },
+      "filter": {
+        "custom_stop_words_filter": {
+          "type": "stop",
+          "ignore_case": true,
+          "stopwords": [ "හා", "ද", "විසින්", "සදහා", "ඉහත", "පසුව",  "කර", "බව","එම"]
+        },
+
+         "custom_synonym" : {
+                        "type" : "synonym",
+                        "synonyms" : [
+                            "ගුවන , ආකාසය => අහස",
+                            "හතරකින්, සතරකින්",
+                            "පරණ, පරන =>පැරණි"
+                        ]
+         }
+      }
+    }
+  },
+
+  "mappings": {
+    "properties": {
+
+      "artist": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+          },
+          "analyzed": {
+            "type": "text",
+            "analyzer": "custom_analyzer"
+       
+          }   
+        }
+
+    },
+      "genre": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+          },
+          "analyzed": {
+            "type": "text",
+            "analyzer": "custom_analyzer"
+       
+          }
+        } 
+    },
+
+      "lyrics": {
+       "type": "text",
+        "fields": {
+          "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+          },
+          "analyzed": {
+            "type": "text",
+            "analyzer": "custom_analyzer"
+       
+          }
+        }   
+    },
+
+      "lyrics_writer": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+          },
+          "analyzed": {
+            "type": "text",
+            "analyzer": "custom_analyzer"
+       
+          } 
+        }
+    },
+
+    "music_by": {
+     "type": "text",
+        "fields": {
+          "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+          },
+          "analyzed": {
+            "type": "text",
+            "analyzer": "custom_analyzer"
+       
+          } 
+        }
+    },
+
+     "song_name": {
+     "type": "text",
+        "fields": {
+          "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+          },
+          "analyzed": {
+            "type": "text",
+            "analyzer": "custom_analyzer"
+       
+          } 
+        }
+    },
+    
+    "shares": {
+     "type": "long"
+    },
+
+     "views": {
+       "type": "long"
+    }
+  }
+}
+ 
+}'

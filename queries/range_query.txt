@@ -1,0 +1,14 @@
+curl --location --request POST 'http://localhost:9200/sinhala_songs/_search' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "query":{
+      "range":{
+         "shares":{
+            "gte" : 10, "lte" : 20 
+           
+         }
+      }
+   }
+}
+
+'
